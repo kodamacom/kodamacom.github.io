@@ -18,5 +18,59 @@ function helloSyntaxHighlighter()
 	return "hi!";
 }
 </pre>
+	<div>その２</div>
+<pre class="brush: cpp;">
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+#include "php.h"
 
+#define PHP_MY_EXTENSION_VERSION "1.0"
+#define PHP_MY_EXTENSION_EXTNAME "my_extension"
+
+extern zend_module_entry my_extension_module_entry;
+#define phpext_my_extension_ptr &my_extension_module_entry
+
+// 関数定義
+PHP_FUNCTION(my_function);
+
+// list of custom PHP functions provided by this extension
+// set {NULL, NULL, NULL} as the last record to mark the end of list
+static zend_function_entry my_functions[] = {
+    PHP_FE(my_function, NULL)
+    PHP_FE_END
+};
+
+// the following code creates an entry for the module and registers it with Zend.
+zend_module_entry my_extension_module_entry = {
+#if ZEND_MODULE_API_NO >= 20010901
+    STANDARD_MODULE_HEADER,
+#endif
+    PHP_MY_EXTENSION_EXTNAME,
+    my_functions,
+    NULL, // name of the MINIT function or NULL if not applicable
+    NULL, // name of the MSHUTDOWN function or NULL if not applicable
+    NULL, // name of the RINIT function or NULL if not applicable
+    NULL, // name of the RSHUTDOWN function or NULL if not applicable
+    NULL, // name of the MINFO function or NULL if not applicable
+#if ZEND_MODULE_API_NO >= 20010901
+    PHP_MY_EXTENSION_VERSION,
+#endif
+    STANDARD_MODULE_PROPERTIES
+};
+
+ZEND_GET_MODULE(my_extension)
+
+// implementation of a custom my_function()
+PHP_FUNCTION(my_function)
+{
+    int str_len;
+    char *str;
+    if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &str, &str_len) == FAILURE) {
+        return;
+    }
+    RETURN_STRINGL(str,str_len);
+}
+</pre>
+	
 </html>
