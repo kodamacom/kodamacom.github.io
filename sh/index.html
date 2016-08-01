@@ -5,18 +5,10 @@
 	<title>SyntaxHighlighterの実行例</title>
 	<link href="styles/shThemeDefault.css" rel="stylesheet" type="text/css" />
 	<link type='text/css' rel='stylesheet' href='styles/shThemeEmacs.css'/>
-	<script src="scripts/shCore.js" type="text/javascript"></script>
-	<script src="scripts/shAutoloader.js" type="text/javascript"></script>	
+	<script type="text/javascript" src="scripts/shCore.js"></script>
+	<script type="text/javascript" src="scripts/shBrushJScript.js"></script>
+	<script type="text/javascript" src="scripts/shBrushCpp.js"></script>
 	<script type="text/javascript">
-    		SyntaxHighlighter.autoloader(
-		    ['js','jscript','javascript','scripts/shBrushJScript.js'],
-		    ['bash','shell','scripts/shBrushBash.js'],
-		    ['css','scripts/shBrushCss.js'],
-		    ['cpp','scripts/shBrushCpp.js'],
-		    ['xml','scripts/shBrushXml.js'],
-		    ['sql','scripts/shBrushSql.js'],
-		    ['php','scripts/shBrushPhp.js']
-		);
 		SyntaxHighlighter.defaults['toolbar'] = false;
 		SyntaxHighlighter.all();
 	</script>
